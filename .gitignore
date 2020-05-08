@@ -1,0 +1,6 @@
+*pro.user
+*.autosave
+build-*
+.idea
+*.snap
+cmake-build-debug

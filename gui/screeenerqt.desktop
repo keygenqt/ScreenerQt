@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.0.5
+Name=AssistantQt
+GenericName=AssistantQt
+Comment=AssistantQt open source gui for console application Assistant
+Keywords=utils
+Exec=kg-assistantqt
+Icon=${SNAP}/images/kg-assistantqt.png
+Terminal=false
+Type=Application
+Categories=Utility;
