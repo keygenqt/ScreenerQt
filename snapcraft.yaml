@@ -92,14 +92,17 @@ apps:
     environment:
       DISABLE_WAYLAND: 1
       LC_ALL: C.UTF-8
+    extensions:
+      - gnome-3-28
     plugs:
       - home
+      - network
       - unity7
 
   screener:
     command: java -jar $SNAP/jar/screener.jar
     extensions:
-      - kde-neon
+      - gnome-3-28
     plugs:
       - home
       - network
