@@ -1,6 +1,6 @@
 name: screenerqt
 base: core18
-version: '0.0.1'
+version: '0.0.2'
 summary: ScreenerQt open source gui for console application Screeener.
 description: |
   * Selection area

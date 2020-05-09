@@ -45,20 +45,7 @@ QString Command::getSelect()
     if (value.contains("Url")) {
         return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Urlsaveinclipboard:", "").replace("----", "").trimmed();
     } else {
-        QString path = value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Imagesaveinclipboard:", "").replace("----", "").trimmed();
-
-        QFile file;
-        QClipboard *cb = QApplication::clipboard();
-        QMimeData* mimeData = new QMimeData();
-
-        file.setFileName(path);
-        file.open(QIODevice::ReadOnly);
-        mimeData->setData("image/png", file.readAll());
-        file.close();
-
-        cb->setMimeData(mimeData);
-
-        return path;
+        return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Imagesaveinclipboard:", "").replace("----", "").trimmed();
     }
 }
 
@@ -80,7 +67,8 @@ QString Command::getDesktop()
     p->start(command + " " + desktop);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+----h"), "h").trimmed();
+    QString url = value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+\\:----"), "").replace("----", "").trimmed();
+    return url;
 }
 
 bool Command::getSearch()

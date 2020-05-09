@@ -20,6 +20,7 @@
 
 #include <QObject>
 #include <QProcess>
+#include <QClipboard>
 
 class Command : public QObject
 {
@@ -40,13 +41,13 @@ private:
     QString command = "java -jar ~/Documents/Other/applications/screener/build/libs/screener.jar";
 //    QString command = "java -jar /snap/screenerqt/current/jar/screener.jar"; // snap
 
-    QString select = "--select";
-    QString delay = "--select-delay=3";
-    QString desktop = "--desktop";
-    QString search = "--search";
-    QString vision = "--vision";
-    QString translate = "--translate";
-    QString version = "--version";
+    QString select = "--select --close-time=500";
+    QString delay = "--select-delay=3 --close-time=500";
+    QString desktop = "--desktop --close-time=500";
+    QString search = "--search --close-time=500";
+    QString vision = "--vision --close-time=500";
+    QString translate = "--translate --close-time=500";
+    QString version = "--version --close-time=500";
 };
 
 #endif // COMMAND_H
