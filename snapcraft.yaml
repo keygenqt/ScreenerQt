@@ -1,7 +1,7 @@
-name: screeenerqt
+name: screenerqt
 base: core18
 version: '0.0.1'
-summary: ScreeenerQt open source gui for console application Screeener.
+summary: ScreenerQt open source gui for console application Screeener.
 description: |
   * Selection area
   * Selection area delay
@@ -16,8 +16,8 @@ grade: stable
 confinement: strict
 
 parts:
-  screeenerqt:
-    source: screeenerQt
+  screenerqt:
+    source: screenerQt
     source-type: local
     plugin: qmake
     project-files: ["screenerQt.pro"]
@@ -47,9 +47,9 @@ parts:
 
     after:
       - desktop-qt5
-      - screeener
+      - screener
 
-  screeener:
+  screener:
     plugin: gradle
     gradle-output-dir: build/libs
     source: https://github.com/keygenqt/screener.git
@@ -83,12 +83,12 @@ parts:
     organize:
       '*.desktop': desktop/
       '*.png': images/
-    after: [screeenerqt]
+    after: [screenerqt]
 
 apps:
-  screeenerqt:
-    command: desktop-launch $SNAP/opt/screeenerQt/bin/screeenerQt
-    desktop: desktop/screeenerqt.desktop
+  screenerqt:
+    command: desktop-launch $SNAP/opt/screenerQt/bin/screenerQt
+    desktop: desktop/screenerqt.desktop
     environment:
       DISABLE_WAYLAND: 1
       LC_ALL: C.UTF-8

@@ -16,7 +16,7 @@ public:
 
 private:
 //    QString path = "~/.screener/config.json";
-    QString path = "~/snap/screenerqt/common/config.json"; // snap
+    QString path = "~/../common/config.json"; // snap
     QJsonObject getSettings();
 
 signals:

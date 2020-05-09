@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=0.0.1
+Name=ScreenerQt
+GenericName=ScreenerQt
+Comment=ScreenerQt open source gui for console application Screeener.
+Keywords=utils
+Exec=screenerqt
+Icon=${SNAP}/images/screenerqt.png
+Terminal=false
+Type=Application
+Categories=Utility;

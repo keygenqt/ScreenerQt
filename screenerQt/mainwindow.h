@@ -18,7 +18,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <preview.h>
 #include <dialog.h>
 #include <command.h>
 #include <settings.h>
