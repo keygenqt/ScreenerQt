@@ -1,0 +1,106 @@
+name: screeenerqt
+base: core18
+version: '0.0.1'
+summary: ScreeenerQt open source gui for console application Screeener.
+description: |
+  * Selection area
+  * Selection area delay
+  * Screenshot Desktop
+  * Search screenshot in Google
+  * Cloud Vision (select text from screenshot)
+  * Cloud Translate (translate select text from screenshot)
+  * Save image in buffer
+  * Save image in imgur
+
+grade: stable
+confinement: strict
+
+parts:
+  screeenerqt:
+    source: screeenerQt
+    source-type: local
+    plugin: qmake
+    project-files: ["screenerQt.pro"]
+    build-packages:
+      - g++
+      - qtbase5-dev
+      - openjdk-11-jdk
+      - openjdk-11-jre
+    stage-packages:
+      - openjdk-11-jre
+      - libdouble-conversion1
+      - libfreetype6
+      - libgl1
+      - libglvnd0
+      - libglx0
+      - libgraphite2-3
+      - libharfbuzz0b
+      - libicu60
+      - libpng16-16
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5widgets5
+      - libx11-6
+      - libxau6
+      - libxcb1
+      - libxdmcp6
+
+    after:
+      - desktop-qt5
+      - screeener
+
+  screeener:
+    plugin: gradle
+    gradle-output-dir: build/libs
+    source: https://github.com/keygenqt/screener.git
+    source-type: git
+    source-tag: master
+    build-environment:
+      - JAVA_HOME: /usr/lib/jvm/java-11-openjdk-amd64
+      - PATH: $JAVA_HOME/jre/bin:$PATH
+    build-packages:
+      - default-jdk
+      - default-jre
+      - libslf4j-java
+    stage-packages:
+      - default-jre
+
+  desktop-qt5:
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    plugin: make
+    make-parameters: ["FLAVOR=qt5"]
+    build-packages:
+      - qtbase5-dev
+      - dpkg-dev
+    stage-packages:
+      - locales-all
+
+  desktop-file:
+    plugin: dump
+    source: gui
+    source-type: local
+    organize:
+      '*.desktop': desktop/
+      '*.png': images/
+    after: [screeenerqt]
+
+apps:
+  screeenerqt:
+    command: desktop-launch $SNAP/opt/screeenerQt/bin/screeenerQt
+    desktop: desktop/screeenerqt.desktop
+    environment:
+      DISABLE_WAYLAND: 1
+      LC_ALL: C.UTF-8
+    plugs:
+      - home
+      - unity7
+
+  screener:
+    command: java -jar $SNAP/jar/screener.jar
+    extensions:
+      - kde-neon
+    plugs:
+      - home
+      - network
+      - unity7

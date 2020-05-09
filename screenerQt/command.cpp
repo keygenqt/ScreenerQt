@@ -19,9 +19,11 @@
 #include <qdebug.h>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QDir>
 
 Command::Command(QObject *parent) : QObject(parent)
 {
+    this->command = this->command.replace("~/", QDir::homePath() + "/");
     this->p = new QProcess(this);
 }
 
@@ -29,7 +31,7 @@ QString Command::getVersion()
 {
     p->start(command + " " + version);
     p->waitForFinished();
-    return p->readAllStandardOutput().replace("Screener Ver ", "").replace("\n", "");
+    return p->readAllStandardOutput().replace("Screener Ver ", "").replace("\n", "").trimmed();
 }
 
 QString Command::getSelect()
@@ -37,7 +39,7 @@ QString Command::getSelect()
     p->start(command + " " + select);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Urlsaveinclipboard:", "").replace("----", "");
+    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Urlsaveinclipboard:", "").replace("----", "").trimmed();
 }
 
 QString Command::getDelay()
@@ -45,7 +47,7 @@ QString Command::getDelay()
     p->start(command + " " + delay);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    QString value2 = value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+\\:----"), "").replace("----", "");
+    QString value2 = value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+\\:----"), "").replace("----", "").trimmed();
     if (value2.contains("timer")) {
         return "";
     } else {
@@ -58,7 +60,7 @@ QString Command::getDesktop()
     p->start(command + " " + desktop);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+----h"), "h");
+    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace(QRegularExpression(".+----h"), "h").trimmed();
 }
 
 bool Command::getSearch()
@@ -74,7 +76,10 @@ QString Command::getVision()
     p->start(command + " " + vision);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "");
+    if (!value.contains("success")) {
+        return "";
+    }
+    return value.replace("\n", "").replace(QRegularExpression(".+\\:----"), "").replace("----", "").trimmed();
 }
 
 QString Command::getTranslate()
@@ -82,5 +87,8 @@ QString Command::getTranslate()
     p->start(command + " " + translate);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "");
+    if (!value.contains("success")) {
+        return "";
+    }
+    return value.replace("\n", "").replace(QRegularExpression(".+\\:----"), "").replace("----", "").trimmed();
 }

@@ -37,8 +37,8 @@ public:
 private:
     QProcess *p;
 
-    QString command = "java -jar /home/keygenqt/Documents/Other/applications/screener/build/libs/screener.jar";
-//    QString command = ""; // snap
+//    QString command = "java -jar ~/Documents/Other/applications/screener/build/libs/screener.jar";
+    QString command = "java -jar /snap/screenerqt/current/jar/screener.jar"; // snap
 
     QString select = "--select";
     QString delay = "--select-delay=3";

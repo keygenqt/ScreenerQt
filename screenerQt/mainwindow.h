@@ -21,9 +21,11 @@
 #include <preview.h>
 #include <dialog.h>
 #include <command.h>
+#include <settings.h>
 #include <QMainWindow>
 #include <QCloseEvent>
 #include <QSystemTrayIcon>
+#include "messagebox.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,14 +44,17 @@ protected:
 
 private slots:
     void actionItemTray();
-
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::MainWindow *ui;
     Command *command;
+    Settings *settings;
+
+    MessageBox *msgBox;
 
     QSystemTrayIcon *trayIcon;
 
@@ -62,5 +67,9 @@ private:
     QAction * actionVision;
     QAction * actionTranslate;
     QAction * actionQuit;
+
+    bool showMinimize = true;
+
+    void initLanguageBox();
 };
 #endif // MAINWINDOW_H
