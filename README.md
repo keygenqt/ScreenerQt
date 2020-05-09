@@ -8,8 +8,7 @@ ScreenerQt open source gui for console application Screener.
 ![picture](data/logo-small.png)
 
 ## Release
-
-[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/screener)
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/screenerqt)
 
 ### Info
 
@@ -21,7 +20,6 @@ Linux app for easy screenshot
 * Search screenshot in Google
 * Cloud Vision (select text from screenshot)
 * Cloud Translate (translate select text from screenshot)
-* Save image in buffer
 * Save image in imgur
 
 ### Preview

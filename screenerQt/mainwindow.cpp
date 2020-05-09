@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString version = command->getVersion();
 
     ui->setupUi(this);
-    ui->statusbar->showMessage("ScreenerQt v0.0.1; Screener v" + version);
+    ui->statusbar->showMessage("ScreenerQt v0.0.2; Screener v" + version);
 
     this->setGeometry(
         QStyle::alignedRect(
@@ -99,7 +99,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // default
     ui->comboBox_2->addItem("Upload to Imgur", "true");
-    ui->comboBox_2->addItem("Add to clipboard", "false");
+    ui->comboBox_2->addItem("Only dir", "false");
 
     if (version == "") {
         this->hide();

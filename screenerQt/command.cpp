@@ -20,6 +20,9 @@
 #include <QProcess>
 #include <QRegularExpression>
 #include <QDir>
+#include <QMimeData>
+#include <QClipboard>
+#include <QApplication>
 
 Command::Command(QObject *parent) : QObject(parent)
 {
@@ -39,7 +42,24 @@ QString Command::getSelect()
     p->start(command + " " + select);
     p->waitForFinished();
     QString value = p->readAllStandardOutput();
-    return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Urlsaveinclipboard:", "").replace("----", "").trimmed();
+    if (value.contains("Url")) {
+        return value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Urlsaveinclipboard:", "").replace("----", "").trimmed();
+    } else {
+        QString path = value.replace("\n", "").replace(QRegularExpression("\\s+"), "").replace("Imagesaveinclipboard:", "").replace("----", "").trimmed();
+
+        QFile file;
+        QClipboard *cb = QApplication::clipboard();
+        QMimeData* mimeData = new QMimeData();
+
+        file.setFileName(path);
+        file.open(QIODevice::ReadOnly);
+        mimeData->setData("image/png", file.readAll());
+        file.close();
+
+        cb->setMimeData(mimeData);
+
+        return path;
+    }
 }
 
 QString Command::getDelay()
