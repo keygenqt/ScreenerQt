@@ -224,6 +224,10 @@ void MainWindow::on_pushButton_3_clicked()
                 ui->comboBox->currentData().toString(),
                 ui->comboBox_2->currentData().toString());
 
+    bool disable = this->settings->getCredPath() == "";
+    actionVision->setDisabled(disable);
+    actionTranslate->setDisabled(disable);
+
     QMessageBox::information(this, tr("ScreenerQt"), "Save success");
 }
 
