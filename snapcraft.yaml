@@ -9,7 +9,6 @@ description: |
   * Search screenshot in Google
   * Cloud Vision (select text from screenshot)
   * Cloud Translate (translate select text from screenshot)
-  * Save image in buffer
   * Save image in imgur
 
 grade: stable
